@@ -1,6 +1,14 @@
 import "./App.css";
+import {
+    decrement,
+    increment,
+    selectValue,
+} from "./redux/counter/counterSlice";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
 
 function App() {
+    const value = useAppSelector(selectValue);
+    const dispatch = useAppDispatch();
     return (
         <>
             <div className="min-h-screen bg-white flex items-center justify-center">
@@ -16,7 +24,7 @@ function App() {
 
                     {/* Counter Value */}
                     <div className="mt-20 text-8xl font-light text-black">
-                        0
+                        {value}
                     </div>
 
                     {/* Buttons */}
@@ -26,6 +34,7 @@ function App() {
                             className="h-24 w-24 rounded-2xl border border-gray-200 
                        text-3xl text-gray-700 shadow-sm
                        hover:bg-gray-50 active:scale-95 transition"
+                            onClick={() => dispatch(decrement())}
                         >
                             −
                         </button>
@@ -43,6 +52,7 @@ function App() {
                             className="h-24 w-24 rounded-2xl border border-gray-200 
                        text-3xl text-gray-700 shadow-sm
                        hover:bg-gray-50 active:scale-95 transition"
+                            onClick={() => dispatch(increment())}
                         >
                             +
                         </button>
